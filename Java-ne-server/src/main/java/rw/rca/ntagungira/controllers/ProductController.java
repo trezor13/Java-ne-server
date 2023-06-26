@@ -60,10 +60,9 @@ public class ProductController {
     }
 
     @PostMapping("/purchase")
-    public ResponseEntity<List<Purchased>> purchase(@ModelAttribute("cart") Cart cart) {
+    public ResponseEntity<List<Purchased>> purchase(Map<String, Integer> cart) {
         List<Purchased> purchased = new ArrayList<>();
-        Map<String,Integer> items = cart.getItems();
-        for (Map.Entry<String, Integer> entry : items.entrySet()) {
+        for (Map.Entry<String, Integer> entry : cart.entrySet()) {
             String productId = entry.getKey();
             int quantity = entry.getValue();
             Purchased product = productService.purchase(productId, quantity);
