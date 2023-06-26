@@ -66,8 +66,8 @@ public class AuthController {
 
         return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION, "Bearer "+jwtToken)
                 .body(new UserInfoResponse(userDetails.getId(),
+                        userDetails.getName(),
                         userDetails.getUsername(),
-                        userDetails.getEmail(),
                         roles,
                         jwtToken));
     }

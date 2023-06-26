@@ -1,18 +1,23 @@
 package rw.rca.ntagungira.Pojos.Request;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
+
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.Set;
 
 @Data
 public class SignupRequest {
-    @NotNull
-    private String username;
+    @NotBlank
+    private String name;
     @Email
     private String email;
-    @NotNull
+
+    @NotBlank
+    @Length(min = 10, max = 10)
+    private String phone;
+    @NotBlank
     private String password;
     Set<String> role;
 }
