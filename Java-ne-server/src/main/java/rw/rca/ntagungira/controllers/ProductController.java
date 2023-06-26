@@ -13,22 +13,25 @@ import rw.rca.ntagungira.Pojos.Request.CreateProduct;
 import rw.rca.ntagungira.Pojos.Request.CreateQuantity;
 import rw.rca.ntagungira.Services.ProductService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/api/product")
 public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @ModelAttribute("cart")
-    public Cart getCart() {
-        return new Cart(); // Create a new cart for each user session
-    }
+//    @ModelAttribute("cart")
+//    public Cart getCart() {
+//        return new Cart(); // Create a new cart for each user session
+//    }
 
+    @CrossOrigin(origins = "*")
     @PostMapping("/add")
     public Product createProduct(@Valid @RequestBody CreateProduct product){
         return productService.createProduct(product);
@@ -39,25 +42,30 @@ public class ProductController {
         return productService.createQuantity(quantity);
     }
 
+
     @GetMapping("/all")
-    public Iterable<Product> getAllProducts(){
+    public Iterable<Product> getAllProducts(HttpServletRequest req){
+        System.out.println(req.getHeader("Authorization"));
         return productService.getAllProducts();
     }
 
-    @PostMapping("/cart/add")
-    public ResponseEntity<?> addToCart(
-            @RequestParam("productId") String productId,
-            @RequestParam("quantity") int quantity,
-            @ModelAttribute("cart") Cart cart) {
-        cart.addItem(productId, quantity);
-        return new ResponseEntity<>(cart.getItems(), HttpStatus.OK);
-    }
 
-    @GetMapping("/cart/items")
-    public ResponseEntity<Map<String, Integer>> getCartItems(@ModelAttribute("cart") Cart cart) {
-        Map<String, Integer> items = cart.getItems();
-        return new ResponseEntity<>(items, HttpStatus.OK);
-    }
+//    @PostMapping("/cart/add")
+//    public ResponseEntity<?> addToCart(
+//            @RequestParam("productId") String productId,
+//            @RequestParam("quantity") int quantity,
+//            @ModelAttribute("cart") Cart cart) {
+//        cart.addItem(productId, quantity);
+//        return new ResponseEntity<>(cart.getItems(), HttpStatus.OK);
+//    }
+
+
+//    @GetMapping("/cart/items")
+//    public ResponseEntity<Map<String, Integer>> getCartItems(@ModelAttribute("cart") Cart cart) {
+//        Map<String, Integer> items = cart.getItems();
+//        return new ResponseEntity<>(items, HttpStatus.OK);
+//    }
+
 
     @PostMapping("/purchase")
     public ResponseEntity<List<Purchased>> purchase(Map<String, Integer> cart) {

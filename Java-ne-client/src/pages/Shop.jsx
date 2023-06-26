@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../utils/api';
 import ProductCard from '../components/ProductCard';
+import Cart from '../components/Cart';
 
 function Shop() {
   const navigate = useNavigate();
@@ -17,13 +18,12 @@ function Shop() {
         Authorization: `Bearer ${token}` // Use template literal to concatenate the token properly
       }
     });
-    console.log(response);
-    setProducts(response.data);
+    console.log(response.data);
+    setProducts(response?.data);
   } catch (error) {
     console.log(error);
   }
 };
-
 
   useEffect(()=>{
     //redirect to login form when no token found
@@ -41,18 +41,17 @@ function Shop() {
     <div>
       <Navbar/>
         <div className='mt-12'>
-          {/* <h1 className='mb-12'>Welcome, <span className='font-bold'>Nick</span></h1> */}
-          <h1>Shop</h1>
           {products.length > 0 ? (
             <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
               {products.map((product) => (
-                <ProductCard key={product._id} product={product} />
+                <ProductCard key={product.id} product={product}/>
               ))}
               </div>
           ) : (
             <p className='text-center'>No products found</p>
           )}
         </div>
+        <Cart/>
     </div>
   )
 }
