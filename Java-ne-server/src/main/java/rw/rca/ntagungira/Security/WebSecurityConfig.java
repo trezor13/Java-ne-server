@@ -57,7 +57,7 @@ public class WebSecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth ->
                         auth.antMatchers("/api/auth/**").permitAll()
-                                .antMatchers("/api/product/**").permitAll()
+ //                               .antMatchers("/api/product/**").permitAll()
                                 .antMatchers(
                                         "/",
                                         "/favicon.ico",

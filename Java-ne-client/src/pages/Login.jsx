@@ -39,10 +39,9 @@ const Login = () => {
         //clear form inputs
         setUsername('');
         setPassword('');
-  
         setLoading(false);
         //redirect to dashboard
-        navigate('/dashboard');
+        navigate('/shop');
       }
       else{
         toast(response?.data?.message,{
@@ -74,8 +73,8 @@ const Login = () => {
   <form onSubmit={handleSubmit} className="w-full">
       <div className="mb-6">
         <input
-          type="text"
-          id="text"
+          type="email"
+          id="email"
           className="w-full px-4 py-3 mt-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 placeholder-black text-sm"
           placeholder="Username"
           value={username}

@@ -8,10 +8,10 @@ import { useNavigate } from 'react-router-dom';
 const Signup = () => {
   //form inputs states
     const navigate = useNavigate();
-    const [username, setusername] = useState('');
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
-    const [role, setRole] = useState([]);
     const [confirmPassword, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false)
 
@@ -19,7 +19,7 @@ const Signup = () => {
     const handleSubmit = async (e) => {
       e.preventDefault();
       //check if all fields are provided
-      if (!username || !password || !email || !confirmPassword ) {
+      if (!name || !password || !email || !confirmPassword ) {
         toast("Provide all fields",{
           position: "top-right",
           hideProgressBar : false,
@@ -43,10 +43,10 @@ const Signup = () => {
       setLoading(true);
       try {
         const response = await axios.post(API_URL+'/auth/signup', {
-          username,
+          name,
           email,
+          phone,
           password,
-          role,
         });
         console.log(response?.data)
         if (response?.data?.message === 'User registered successfully!') {
@@ -60,7 +60,7 @@ const Signup = () => {
           //clear form inputs
           setEmail('');
           setPassword('');
-          setusername('');
+          setName('');
           setConfirmPassword('');
     
           setLoading(false);
@@ -100,9 +100,9 @@ const Signup = () => {
           type="text"
           id="fullname"
           className="w-full px-4 py-3 mt-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 placeholder-black text-sm"
-          placeholder="User name"
-          value={username}
-          onChange={(e) => setusername(e.target.value)}
+          placeholder="full name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
       </div>
       <div className="mb-6">
@@ -113,6 +113,16 @@ const Signup = () => {
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
+        <div className="mb-6">
+        <input
+          type="tel"
+          id="phone"
+          className="w-full px-4 py-3 mt-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 placeholder-black text-sm"
+          placeholder="phone"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
         />
       </div>
       <div className="mb-8">
