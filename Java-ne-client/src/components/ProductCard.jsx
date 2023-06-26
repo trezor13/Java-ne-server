@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProductCard = ({product, addToCart }) => {
+const ProductCard = ({product}) => {
   const {id,name,price}=product;
   const handleAddToCart = () => {
     addToCart(product);
@@ -20,7 +20,7 @@ const ProductCard = ({product, addToCart }) => {
       </div>
       <div className="px-6 pb-4">
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" 
-        onClick={handleAddToCart}>
+        onClick={addToCart}>
           Add to Cart
         </button>
       </div>
