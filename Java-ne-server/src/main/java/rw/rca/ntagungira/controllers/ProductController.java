@@ -30,8 +30,7 @@ public class ProductController {
 //    public Cart getCart() {
 //        return new Cart(); // Create a new cart for each user session
 //    }
-
-    @CrossOrigin(origins = "*")
+    
     @PostMapping("/add")
     public Product createProduct(@Valid @RequestBody CreateProduct product){
         return productService.createProduct(product);
@@ -45,7 +44,7 @@ public class ProductController {
 
     @GetMapping("/all")
     public Iterable<Product> getAllProducts(HttpServletRequest req){
-        System.out.println(req.getHeader("Authorization"));
+        //System.out.println(req.getHeader("Authorization"));
         return productService.getAllProducts();
     }
 
