@@ -12,6 +12,7 @@ import rw.rca.ntagungira.Models.Purchased;
 import rw.rca.ntagungira.Models.Quantity;
 import rw.rca.ntagungira.Pojos.Request.CreateProduct;
 import rw.rca.ntagungira.Pojos.Request.CreateQuantity;
+import rw.rca.ntagungira.Pojos.Request.PurchaseRequest;
 import rw.rca.ntagungira.Services.ProductService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,14 +47,12 @@ public class ProductController {
 
 
     @PostMapping("/purchase")
-    public ResponseEntity<List<Purchased>> purchase(@RequestBody Map<String, Integer> cart) {
-        List<Purchased> purchased = new ArrayList<>();
-        for (Map.Entry<String, Integer> entry : cart.entrySet()) {
-            String productId = entry.getKey();
-            int quantity = entry.getValue();
-            Purchased product = productService.purchase(productId, quantity);
-            purchased.add(product);
+    public ResponseEntity<List<Purchased>> purchase(@RequestBody List<PurchaseRequest> purchaseRequest) {
+        List<Purchased> purchases = new ArrayList<>();
+        for (PurchaseRequest purchased : purchaseRequest) {
+            Purchased product = productService.purchase(purchased.getProductId(), purchased.getQuantity());
+            purchases.add(product);
         }
-        return new ResponseEntity<>(purchased, HttpStatus.OK);
+        return new ResponseEntity<>(purchases, HttpStatus.OK);
     }
 }

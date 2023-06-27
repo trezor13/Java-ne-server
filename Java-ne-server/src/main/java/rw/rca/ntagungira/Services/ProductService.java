@@ -53,8 +53,8 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Purchased purchase(String productId, int quantity) {
-        Product product = getProductByCode(Integer.parseInt(productId));
+    public Purchased purchase(Integer productId, int quantity) {
+        Product product = getProductByCode(productId);
         Quantity quantity1 = product.getQuantity();
         if(quantity1.getQuantity() < quantity){
             throw new RuntimeException("Not enough quantity");
