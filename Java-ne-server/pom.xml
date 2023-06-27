@@ -8,11 +8,11 @@
         <version>2.7.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>rw.rca.ntagungira.ne</groupId>
-    <artifactId>ntagungira</artifactId>
+    <groupId>rw.rca.tresor.ne</groupId>
+    <artifactId>tresor</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>ntagungira</name>
-    <description>ntagungira ne</description>
+    <name>tresor</name>
+    <description>tresor ne</description>
     <properties>
         <java.version>17</java.version>
     </properties>
