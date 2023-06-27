@@ -21,7 +21,7 @@ function Navbar() {
     <header className='pr-5 md:grid grid-cols-2 md:grid-cols-5 justify-between items-center mb-2'>
       <div className='flex w-full md:flex items-center justify-between'>
         <h1 className='text-2xl text-[#10B981] font-black'>
-          <Link to='/dashboard'>App Title</Link>
+          <Link to='/shop'>BSM</Link>
         </h1>
         <div className='md:hidden ml-4'>
           <button
@@ -97,8 +97,6 @@ function Navbar() {
       </nav>
 
       <div className='hidden md:flex md:col-span-3 items-center justify-center pl-16'>
-        <Link to='/#'>Add Item</Link>
-        <Link to='/dashboard' className='ml-8'>Dashboard</Link>
       </div>
 
         <div className='hidden md:flex justify-end text-gray-500 font-black pr-2' onClick={handleLogout}>
