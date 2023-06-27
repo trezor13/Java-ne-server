@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/product")
 public class ProductController {
@@ -52,7 +53,6 @@ public class ProductController {
         cart.addItem(productId, quantity);
         return new ResponseEntity<>(cart.getItems(), HttpStatus.OK);
     }
-
     @GetMapping("/cart/items")
     public ResponseEntity<Map<String, Integer>> getCartItems(@ModelAttribute("cart") Cart cart) {
         Map<String, Integer> items = cart.getItems();
