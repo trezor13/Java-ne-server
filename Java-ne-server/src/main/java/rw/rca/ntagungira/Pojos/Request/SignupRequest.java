@@ -13,7 +13,6 @@ public class SignupRequest {
     private String name;
     @Email
     private String email;
-
     @NotBlank
     @Length(min = 10, max = 10)
     private String phone;

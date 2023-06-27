@@ -1,5 +1,6 @@
 package rw.rca.ntagungira.Models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
@@ -15,11 +16,13 @@ public class Quantity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_code", referencedColumnName = "code")
-    @JsonManagedReference
+    @JsonBackReference
     private Product product;
+
     private int quantity;
     private String operation;
-    private Date date;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date=new Date();
 }

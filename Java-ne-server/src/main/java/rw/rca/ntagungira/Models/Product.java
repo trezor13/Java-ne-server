@@ -1,6 +1,7 @@
 package rw.rca.ntagungira.Models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -21,9 +22,10 @@ public class Product {
     private String type;
     private String price;
 
-    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
-    @JsonBackReference
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
     private Quantity quantity;
+
     @Temporal(TemporalType.TIMESTAMP)
-    private Date inDate;
+    private Date inDate = new Date();
 }

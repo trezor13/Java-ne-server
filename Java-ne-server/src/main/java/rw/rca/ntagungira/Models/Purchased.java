@@ -17,15 +17,11 @@ public class Purchased {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
     private int quantity;
-
     private double total;
-
     @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
+    private Date date = new Date();
 }

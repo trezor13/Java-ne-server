@@ -20,9 +20,7 @@ public class UserDetailsImpl implements UserDetails {
     private Long id;
     private String name;
     private String username;
-
     private String phone;
-
     @JsonIgnore
     private String password;
     private Collection<?extends GrantedAuthority> authorities;
