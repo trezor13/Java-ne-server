@@ -5,6 +5,8 @@ import { API_URL } from '../utils/api';
 import Navbar from '../components/Navbar';
 import ProductCard from '../components/ProductCard';
 import Cart from '../components/Cart';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Shop() {
   const navigate = useNavigate();
@@ -57,10 +59,9 @@ function Shop() {
 
   const handleCheckout = async () => {
     try {
-      const cart = cartItems.reduce((map, item) => {
-        map[item.id] = item.quantity;
-        return map;
-      }, {});
+      const cart = cartItems.map(item=>{
+        return {productId:item.code,quantity:item.quantity}
+      })
       console.log(cart);
 
       const response = await axios.post(API_URL + '/product/purchase', cart, {
@@ -70,12 +71,15 @@ function Shop() {
       });
 
       // Handle the response after checkout (e.g., show success message, clear cart, etc.)
-      console.log('Checkout successful');
-      console.log(response.data);
+      //console.log('Checkout successful');
+      if(response.data){
+        toast("Checkout successful");
+      }
 
       // Clear the cart by removing the cart items from local storage
       localStorage.removeItem('cartItems');
       setCartItems([]);
+      
     } catch (error) {
       console.log('Checkout failed');
       console.log(error);
@@ -84,12 +88,13 @@ function Shop() {
 
   return (
     <div>
+      <ToastContainer />
       <Navbar />
       <div className="mt-12">
         {products.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {products.map((product) => (
-              <ProductCard key={product.id} product={product} onAddToCart={handleAddToCart} />
+              <ProductCard key={product.code} product={product} onAddToCart={handleAddToCart} />
             ))}
           </div>
         ) : (
